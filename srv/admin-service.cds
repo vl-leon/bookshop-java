@@ -1,4 +1,6 @@
 using { sap.capire.bookshop as my } from '../db/schema';
+using from './admin-constraints';
+
 service AdminService @(path:'/admin') {
 
   @Common.DraftRoot.NewAction: 'AdminService.createAuthorDraft'
@@ -13,3 +15,7 @@ service AdminService @(path:'/admin') {
 
   entity Genres as projection on my.Genres;
 }
+
+annotate AdminService with @odata;
+// Additionally serve via HCQL and REST
+// missing in java: annotate AdminService with @hcql @rest;
